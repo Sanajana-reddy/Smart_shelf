@@ -1,24 +1,33 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { InventoryProvider } from "./context/InventoryContext";
 import Dashboard from "./Components/Dashboard";
-import ProductForm from "./Components/ProductForm";
 import ProductList from "./Components/ProductList";
-import Products from "./Components/Products";
-import Navbar from "./Components/Navbar"; // ✅ import navbar
+import ProductForm from "./Components/ProductForm";
+import Orders from "./Components/Orders";
+import OrderDetails from "./Components/OrderDetails";
+import Reports from "./Components/Reports";
+import Sales from "./Components/Sales";
+import Stock from "./Components/Stock";
+import Navbar from "./Components/Navbar";
 
 function App() {
   return (
-    <Router>
-      <Navbar /> {/* ✅ show navbar on all pages */}
-      <div style={{ padding: "20px" }}>
+    <InventoryProvider>
+      <Router>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/add" element={<ProductForm />} />
-          <Route path="/products/list" element={<ProductList />} />
+          <Route path="/products" element={<ProductList />} />
+          <Route path="/add-product" element={<ProductForm />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/orders/:id" element={<OrderDetails />} />
+          <Route path="/stock" element={<Stock />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/sales" element={<Sales />} />
         </Routes>
-      </div>
-    </Router>
+      </Router>
+    </InventoryProvider>
   );
 }
 
